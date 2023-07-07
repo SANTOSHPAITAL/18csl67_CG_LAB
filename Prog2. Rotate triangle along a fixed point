@@ -1,0 +1,58 @@
+//Prog2. Rotate triangle along a fixed point
+#include "stdafx.h"
+#include<glut.h>
+float x,y,a;
+void init()
+{
+glClearColor(0.0,0.0,0.0,0.0);
+gluOrtho2D(-50,50,-50,50);
+}
+void Tri()
+{
+glBegin(GL_TRIANGLES);
+glVertex2i(10.0,10.0);
+glVertex2i(20.0,20.0);
+glVertex2i(30.0,10.0);
+glEnd();
+}
+void display()
+{
+glClear(GL_COLOR_BUFFER_BIT);
+glColor3f(1.0,1.0,1.0);
+glBegin(GL_LINES);
+glVertex2i(50,0);
+glVertex2i(-50,0);
+glVertex2i(0,50);
+glVertex2i(0,-50);
+glEnd();
+glColor3f(1.0,0.0,0.0);
+Tri();
+glPushMatrix();
+glRotatef(a,0.0,0.0,1.0);
+glColor3f(0.0,1.0,0.0);
+Tri();
+glPopMatrix();
+glPushMatrix();
+glTranslatef(x,y,0.0);
+glRotatef(a,0.0,0.0,1.0);
+glTranslatef(-x,-y,0.0);
+glColor3f(0.0,0.0,1.0);
+Tri();
+glPopMatrix();
+glFlush();
+}
+int main()
+{
+printf("ANGLE:");
+scanf_s("%f",&a);
+printf("x:");
+scanf_s("%f",&x);
+printf("y:");
+scanf_s("%f",&y);
+glutInitDisplayMode(GLUT_SINGLE);
+glutInitWindowSize(600,600);
+glutCreateWindow("FLIP TRIANGLE");
+init();
+glutDisplayFunc(display);
+glutMainLoop();
+}
